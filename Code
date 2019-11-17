@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+using namespace std;
+int dicevalue[]={6,1,6,4,4,6,5,4,1,6,6,2,6,6,5,2,2,5,3,5,6,3,2,3,3,5,3,4,2,5,2,5,2,
+                  6,3,3,5,2,5,6,5,1,4,2,5,4,1,6,3,4,1,1,1,5,6,3};
+int main()
+{
+    int s,x,y;
+    cin>>s;
+    map<int,int>ms;
+    for(int i=0;i<s;i++)
+    {
+        x,y;
+        cin>>x>>y;
+        ms[x]=y;
+    }
+    int l;
+    cin>>l;
+    map<int,int>ml;
+    for(int i=0;i<l;i++)
+    {
+        cin>>x>>y;
+        ml[x]=y;
+    }
+    int p;
+    cin>>p;
+    vector<string>v;
+    for(int i=0;i<p;i++)
+    {
+        string player;
+        cin>>player;
+        v.push_back(player);
+    }
+    int sp=0,gp=0,i=0;
+    while(1)
+    {   if(gp+dicevalue[i]<=100){
+        cout<<v[i%p]<<" rolled a "<<dicevalue[i]<<" and moved from "<<gp <<" to ";
+        gp=gp+dicevalue[i];
+        if(ms.find(gp)!=ms.end())
+        gp=ms[gp];
+        
+        if(ml.find(gp)!=ml.end())
+        gp=ml[gp];
+        
+        cout<<gp<<"\n";
+        if(gp==100)
+        { cout<<v[i%p]<<" wins the game\n";break;}
+        
+        
+        }
+        else
+        cout<<v[i%p]<<" rolled a "<<dicevalue[i]<<" and moved from "<<gp <<" to "<<gp<<"\n";
+        i++;
+        
+        if(sp+dicevalue[i]<=100)
+        {  
+           
+           cout<<v[i%p]<<" rolled a "<<dicevalue[i]<<" and moved from "<<sp <<" to ";
+           sp=sp+dicevalue[i];
+           
+           if(ms.find(sp)!=ms.end())
+           sp=ms[sp];
+           
+           if(ml.find(sp)!=ml.end())
+           sp=ml[sp];
+           
+           cout<<sp<<"\n";           
+           if(sp==100){ cout<<v[i%p]<<" wins the game\n";break;}
+           
+           
+           
+          
+           
+        }
+        else
+        cout<<v[i%p]<<" rolled a "<<dicevalue[i]<<" and moved from "<<sp <<" to "<<sp<<"\n";
+        i++;
+        
+        
+    }
+    
+    
+}
